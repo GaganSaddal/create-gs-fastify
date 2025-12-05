@@ -1,0 +1,64 @@
+/**
+ * Application constants
+ */
+
+// User roles
+const ROLES = {
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+  MODERATOR: 'MODERATOR',
+};
+
+// Token types
+const TOKEN_TYPES = {
+  ACCESS: 'access',
+  REFRESH: 'refresh',
+};
+
+// HTTP status codes
+const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  UNPROCESSABLE_ENTITY: 422,
+  TOO_MANY_REQUESTS: 429,
+  INTERNAL_SERVER_ERROR: 500,
+};
+
+// Error codes
+const ERROR_CODES = {
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  AUTHENTICATION_ERROR: 'AUTHENTICATION_ERROR',
+  AUTHORIZATION_ERROR: 'AUTHORIZATION_ERROR',
+  NOT_FOUND_ERROR: 'NOT_FOUND_ERROR',
+  CONFLICT_ERROR: 'CONFLICT_ERROR',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+  RATE_LIMIT_ERROR: 'RATE_LIMIT_ERROR',
+};
+
+// Pagination defaults
+const PAGINATION = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_LIMIT: 10,
+  MAX_LIMIT: 100,
+};
+
+// Sort orders
+const SORT_ORDER = {
+  ASC: 'asc',
+  DESC: 'desc',
+};
+
+module.exports = {
+  ROLES,
+  TOKEN_TYPES,
+  HTTP_STATUS,
+  ERROR_CODES,
+  PAGINATION,
+  SORT_ORDER,
+};

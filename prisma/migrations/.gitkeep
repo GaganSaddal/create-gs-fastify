@@ -1,0 +1,2 @@
+# Placeholder for migrations directory
+# Migrations will be created when you run: npm run prisma:migrate
