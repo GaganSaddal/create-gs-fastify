@@ -10,12 +10,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gagansaddal/create-gs-fastify.git"
+    "url": "git+https://github.com/GaganSaddal/create-gs-fastify.git"
   },
   "bugs": {
-    "url": "https://github.com/gagansaddal/create-gs-fastify/issues"
+    "url": "https://github.com/GaganSaddal/create-gs-fastify/issues"
   },
-  "homepage": "https://github.com/gagansaddal/create-gs-fastify#readme",
+  "homepage": "https://github.com/GaganSaddal/create-gs-fastify#readme",
   "publishConfig": {
     "access": "public"
   },
