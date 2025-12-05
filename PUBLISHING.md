@@ -1,92 +1,46 @@
-# GitHub & NPM Publishing Guide
+# Create GS Fastify - Publishing Guide
 
 ## 📦 NPM Package Information
 
-**Package Name:** `@gagansaddal/fastify-enterprise-boilerplate`
+**Package Name:** `create-gs-fastify`
 
-**Installation:**
+**Usage:**
 ```bash
-npx @gagansaddal/fastify-enterprise-boilerplate my-project
-# or
-npm create @gagansaddal/fastify-enterprise-boilerplate my-project
+npm create gs-fastify my-project
+npm init gs-fastify my-project
+npx create-gs-fastify my-project
 ```
 
 ---
 
-## 🔗 Step 1: Initialize Git Repository
+## 🔗 Step 1: Update GitHub Repository
+
+Since you've already set up GitHub, update the repository name if needed:
 
 ```bash
-cd /media/nsl/d11f4b2c-5b98-4250-90a8-b265531c511c/Create-Fastify-Panel
+# If you need to rename the repository on GitHub:
+# Go to Settings → Repository name → Rename to "create-gs-fastify"
 
-# Initialize git
-git init
-
-# Add all files
-git add .
-
-# Create initial commit
-git commit -m "Initial commit: Production-grade Fastify boilerplate with email and push notifications"
+# Update local remote URL
+git remote set-url origin https://github.com/gagansaddal/create-gs-fastify.git
 ```
 
 ---
 
-## 🌐 Step 2: Create GitHub Repository
-
-### Option A: Using GitHub CLI (gh)
-
-```bash
-# Install GitHub CLI if not already installed
-# sudo apt install gh  # Linux
-# brew install gh      # macOS
-
-# Login to GitHub
-gh auth login
-
-# Create repository
-gh repo create fastify-enterprise-boilerplate \
-  --public \
-  --description "Production-grade Node.js + Fastify boilerplate with JWT auth, RBAC, Prisma ORM, email service, push notifications" \
-  --source=. \
-  --remote=origin \
-  --push
-```
-
-### Option B: Manual GitHub Setup
-
-1. Go to https://github.com/new
-2. Repository name: `fastify-enterprise-boilerplate`
-3. Description: "Production-grade Node.js + Fastify boilerplate with JWT auth, RBAC, Prisma ORM, email service, push notifications"
-4. Choose Public
-5. Don't initialize with README (we already have one)
-6. Click "Create repository"
-
-Then run:
-```bash
-git remote add origin https://github.com/gagansaddal/fastify-enterprise-boilerplate.git
-git branch -M main
-git push -u origin main
-```
-
----
-
-## 📦 Step 3: Publish to NPM
+## 📦 Step 2: Publish to NPM
 
 ### Prerequisites
 
-1. **Create NPM Account** (if you don't have one)
-   - Go to https://www.npmjs.com/signup
-   - Create account with username: `gagansaddal`
-
-2. **Login to NPM**
+1. **Login to NPM**
    ```bash
    npm login
    # Enter your NPM credentials
    ```
 
-3. **Verify Login**
+2. **Verify Login**
    ```bash
    npm whoami
-   # Should output: gagansaddal
+   # Should output your username
    ```
 
 ### Publishing Steps
@@ -99,156 +53,134 @@ cd /media/nsl/d11f4b2c-5b98-4250-90a8-b265531c511c/Create-Fastify-Panel
 npm pack
 # This creates a .tgz file you can inspect
 
-# 3. Publish to NPM
-npm publish --access public
+# 3. Test the CLI locally
+npm link
+create-gs-fastify test-project
+cd test-project && npm install
 
-# For scoped packages (@gagansaddal/...), you MUST use --access public
+# 4. If everything works, publish to NPM
+npm publish
 ```
 
-### Version Updates
+**Note:** Since the package name is `create-gs-fastify` (not scoped), you don't need `--access public`.
 
-When you make changes and want to publish updates:
+---
+
+## 🎯 How It Works
+
+When users run:
+```bash
+npm create gs-fastify my-project
+```
+
+NPM automatically:
+1. Looks for package named `create-gs-fastify`
+2. Downloads and runs it
+3. Passes `my-project` as an argument
+4. The CLI clones your repository
+5. Sets up the project with the given name
+
+---
+
+## 🧪 Testing Before Publishing
+
+### Test Locally
 
 ```bash
-# Patch version (1.0.0 -> 1.0.1)
-npm version patch
+# Link the package globally
+npm link
 
-# Minor version (1.0.0 -> 1.1.0)
-npm version minor
+# Test it
+create-gs-fastify test-app
+cd test-app
+npm install
+npm run dev
 
-# Major version (1.0.0 -> 2.0.0)
-npm version major
-
-# Then publish
-npm publish --access public
+# Clean up
+cd ..
+rm -rf test-app
+npm unlink -g create-gs-fastify
 ```
 
----
-
-## 🎯 Step 4: Add NPM Badge to README
-
-Add this to the top of your README.md:
-
-```markdown
-[![npm version](https://badge.fury.io/js/@gagansaddal%2Ffastify-enterprise-boilerplate.svg)](https://www.npmjs.com/package/@gagansaddal/fastify-enterprise-boilerplate)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/gagansaddal/fastify-enterprise-boilerplate.svg)](https://github.com/gagansaddal/fastify-enterprise-boilerplate/stargazers)
-```
-
----
-
-## 📝 Step 5: Create GitHub Releases
-
-After publishing to NPM, create a GitHub release:
+### Test After Publishing
 
 ```bash
-# Using GitHub CLI
-gh release create v1.0.0 \
-  --title "v1.0.0 - Initial Release" \
-  --notes "Production-grade Fastify boilerplate with email and push notifications"
+# Test npm create
+npm create gs-fastify test-project
 
-# Or manually at:
-# https://github.com/gagansaddal/fastify-enterprise-boilerplate/releases/new
+# Test npm init
+npm init gs-fastify test-project
+
+# Test npx
+npx create-gs-fastify test-project
 ```
 
 ---
 
-## 🔄 Automated Publishing (Optional)
+## 🔄 Version Updates
 
-Create `.github/workflows/publish.yml` for automatic NPM publishing:
+When you make changes:
 
-```yaml
-name: Publish to NPM
+```bash
+# Update version
+npm version patch  # 1.0.0 -> 1.0.1
+npm version minor  # 1.0.0 -> 1.1.0
+npm version major  # 1.0.0 -> 2.0.0
 
-on:
-  release:
-    types: [created]
+# Commit and push
+git push && git push --tags
 
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+# Publish
+npm publish
 ```
-
-Then add your NPM token to GitHub secrets:
-1. Generate token at https://www.npmjs.com/settings/YOUR_USERNAME/tokens
-2. Add to GitHub: Settings → Secrets → New repository secret
-3. Name: `NPM_TOKEN`, Value: your token
 
 ---
 
 ## 📊 Package Statistics
 
 After publishing, your package will be available at:
-- **NPM:** https://www.npmjs.com/package/@gagansaddal/fastify-enterprise-boilerplate
-- **GitHub:** https://github.com/gagansaddal/fastify-enterprise-boilerplate
-- **NPM Stats:** https://npm-stat.com/charts.html?package=@gagansaddal/fastify-enterprise-boilerplate
+- **NPM:** https://www.npmjs.com/package/create-gs-fastify
+- **GitHub:** https://github.com/gagansaddal/create-gs-fastify
+- **NPM Stats:** https://npm-stat.com/charts.html?package=create-gs-fastify
 
 ---
 
-## 🎉 Usage After Publishing
+## 🎨 Customization
 
-Users can create new projects using your boilerplate:
+### Update CLI Banner
 
-```bash
-# Using npx (recommended)
-npx @gagansaddal/fastify-enterprise-boilerplate my-awesome-api
+Edit `bin/cli.js` to customize the welcome message.
 
-# Or install globally
-npm install -g @gagansaddal/fastify-enterprise-boilerplate
-create-fastify-enterprise-boilerplate my-awesome-api
-```
+### Change Repository URL
+
+Update `REPO_URL` in `bin/cli.js` if you change the GitHub repository name.
 
 ---
 
-## 🔧 Maintenance
+## ✅ Pre-Publish Checklist
 
-### Update Package
-
-1. Make your changes
-2. Commit to git
-3. Update version: `npm version patch/minor/major`
-4. Push to GitHub: `git push && git push --tags`
-5. Publish to NPM: `npm publish --access public`
-
-### Unpublish (if needed)
-
-```bash
-# Unpublish specific version
-npm unpublish @gagansaddal/fastify-enterprise-boilerplate@1.0.0
-
-# Unpublish entire package (within 72 hours)
-npm unpublish @gagansaddal/fastify-enterprise-boilerplate --force
-```
-
-**Note:** Unpublishing is discouraged. Use deprecation instead:
-```bash
-npm deprecate @gagansaddal/fastify-enterprise-boilerplate@1.0.0 "Use version 1.0.1 instead"
-```
+- [x] Package name is `create-gs-fastify`
+- [x] `bin/cli.js` is executable (`chmod +x bin/cli.js`)
+- [x] `bin` field in package.json points to CLI
+- [x] README updated with correct commands
+- [x] GitHub repository exists
+- [x] All tests pass
+- [ ] Tested locally with `npm link`
+- [ ] Ready to publish
 
 ---
 
-## ✅ Checklist
+## 🚀 Publishing Commands
 
-Before publishing, ensure:
+```bash
+# First time publish
+npm publish
 
-- [ ] All tests pass: `npm test`
-- [ ] README is complete and accurate
-- [ ] LICENSE file exists
-- [ ] .gitignore is properly configured
-- [ ] package.json has correct information
-- [ ] No sensitive data in repository
-- [ ] Version number is correct
-- [ ] Git repository is clean
+# Update and republish
+npm version patch
+git push && git push --tags
+npm publish
+```
 
 ---
 
@@ -256,36 +188,42 @@ Before publishing, ensure:
 
 ### Error: "Package name already exists"
 
-If `@gagansaddal/fastify-enterprise-boilerplate` is taken, try:
-- `@gagansaddal/fastify-pro-boilerplate`
-- `@gagansaddal/fastify-starter-kit`
-- `@gagansaddal/fastify-api-boilerplate`
-
-Check availability:
+Check if the name is available:
 ```bash
-npm view @gagansaddal/fastify-enterprise-boilerplate
+npm view create-gs-fastify
 # If it returns 404, the name is available
 ```
 
-### Error: "You must be logged in"
+If taken, try alternatives:
+- `create-fastify-gs`
+- `gs-fastify-create`
+- `create-gagan-fastify`
 
+### Error: "ENOENT: no such file or directory"
+
+Make sure `bin/cli.js` exists and is executable:
 ```bash
-npm logout
-npm login
+chmod +x bin/cli.js
 ```
 
-### Error: "402 Payment Required"
+### CLI doesn't work after publishing
 
-Your package name might be reserved. Use a scoped package (`@username/package-name`).
+1. Check the `bin` field in package.json
+2. Ensure the shebang `#!/usr/bin/env node` is at the top of cli.js
+3. Verify the file is executable
 
 ---
 
 ## 📞 Support
 
-- **Issues:** https://github.com/gagansaddal/fastify-enterprise-boilerplate/issues
-- **Discussions:** https://github.com/gagansaddal/fastify-enterprise-boilerplate/discussions
-- **NPM:** https://www.npmjs.com/package/@gagansaddal/fastify-enterprise-boilerplate
+- **Issues:** https://github.com/gagansaddal/create-gs-fastify/issues
+- **NPM:** https://www.npmjs.com/package/create-gs-fastify
 
 ---
 
 **Ready to publish!** 🚀
+
+Users will be able to create new projects with:
+```bash
+npm create gs-fastify my-awesome-api
+```

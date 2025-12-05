@@ -1,8 +1,40 @@
-# Fastify Boilerplate
+# Create GS Fastify
 
-> Production-grade Node.js + Fastify REST API boilerplate with authentication, authorization, and best practices.
+[![npm version](https://badge.fury.io/js/create-gs-fastify.svg)](https://www.npmjs.com/package/create-gs-fastify)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/gagansaddal/create-gs-fastify.svg)](https://github.com/gagansaddal/create-gs-fastify/stargazers)
+
+> Production-grade Node.js + Fastify REST API boilerplate scaffolding tool with authentication, authorization, and best practices.
 
 **Author:** Gagan Saddal
+
+## 📦 Quick Start
+
+### Using NPM Create (Recommended)
+
+```bash
+npm create gs-fastify my-project
+```
+
+### Using NPM Init
+
+```bash
+npm init gs-fastify my-project
+```
+
+### Using NPX
+
+```bash
+npx create-gs-fastify my-project
+```
+
+### Manual Installation
+
+```bash
+git clone https://github.com/gagansaddal/create-gs-fastify.git my-project
+cd my-project
+npm install
+```
 
 ## 🚀 Features
 

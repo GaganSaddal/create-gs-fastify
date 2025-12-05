@@ -1,18 +1,21 @@
 {
-  "name": "@gagansaddal/fastify-enterprise-boilerplate",
-  "version": "1.0.0",
-  "description": "Production-grade Node.js + Fastify boilerplate with JWT auth, RBAC, Prisma ORM, email service, push notifications, and comprehensive security",
-  "main": "src/server.js",
+  "name": "create-gs-fastify",
+  "version": "1.0.1",
+  "description": "Production-grade Node.js + Fastify boilerplate scaffolding tool with JWT auth, RBAC, Prisma ORM, email service, and push notifications",
+  "main": "index.js",
+  "bin": {
+    "create-gs-fastify": "./bin/cli.js"
+  },
   "author": "Gagan Saddal <gagan@example.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gagansaddal/fastify-enterprise-boilerplate.git"
+    "url": "https://github.com/gagansaddal/create-gs-fastify.git"
   },
   "bugs": {
-    "url": "https://github.com/gagansaddal/fastify-enterprise-boilerplate/issues"
+    "url": "https://github.com/gagansaddal/create-gs-fastify/issues"
   },
-  "homepage": "https://github.com/gagansaddal/fastify-enterprise-boilerplate#readme",
+  "homepage": "https://github.com/gagansaddal/create-gs-fastify#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -88,6 +91,8 @@
     "starter-kit"
   ],
   "files": [
+    "bin/",
+    "index.js",
     "src/",
     "prisma/",
     "tests/",
